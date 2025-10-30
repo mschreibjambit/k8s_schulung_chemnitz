@@ -10,4 +10,4 @@ spec:
   values:
     controller:
       extraArgs:
-        default-ssl-certificate: "nginx-ingress/tls-secret"
+        default-ssl-certificate: "ingress-nginx/tls-secret"
