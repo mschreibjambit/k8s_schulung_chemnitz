@@ -1,0 +1,68 @@
+# Konfiguration für den Microservice 'CustomerDataService'
+customer.service.url=https://api.example.com/customer
+customer.service.retry.count=5
+customer.service.retry.delay.ms=2000
+customer.service.cache.enabled=true
+customer.service.cache.ttl.seconds=3600
+
+# Authentifizierung
+auth.token.expiry.minutes=30
+auth.token.secret.key=w9f83n4rnf3o8n3rf89n3rf0n38rf0n38rf0n3rf
+auth.oauth.clientId=customer-service-client
+auth.oauth.clientSecret=KJH987df8w3rnfw8erfwe98rf
+auth.oauth.scopes=read:customer,write:customer,delete:customer
+
+# PostgreSQL-Datenbankverbindung
+db.url=jdbc:postgresql://db01.prod.example.com:5432/customerdb
+db.user=svc_customer
+db.password=s3cur3P@ssw0rd!
+db.pool.maxSize=25
+db.pool.minIdle=5
+db.pool.timeout.ms=30000
+
+# Kafka-Konfiguration
+kafka.bootstrap.servers=kafka01:9092,kafka02:9092,kafka03:9092
+kafka.topic.customer.created=customer.created.v2
+kafka.topic.customer.updated=customer.updated.v2
+kafka.consumer.group.id=customer-service-group
+kafka.consumer.auto.offset.reset=latest
+kafka.consumer.enable.auto.commit=false
+
+# Feature Flags
+feature.onboarding.enabled=true
+feature.address.validation.enabled=false
+feature.legacyMode.supported=true
+
+# Externe APIs
+external.api.addressVerification.url=https://verify.example.com/api/v1/addresses
+external.api.addressVerification.apikey=sk_live_394hfj39fj398rjf398r
+
+# Logging & Monitoring
+logging.level.de.jambit.customerdata=DEBUG
+logging.file.path=/var/log/customerdata/application.log
+monitoring.prometheus.endpoint.enabled=true
+monitoring.prometheus.endpoint.port=8085
+
+# Security Einstellungen
+security.cors.allowed.origins=https://app.example.com,https://admin.example.com
+security.contentSecurityPolicy=default-src 'self'; script-src 'self' 'unsafe-inline'; object-src 'none'
+
+# Lokalisierung
+locale.default=de_DE
+locale.supported=de_DE,en_US,fr_FR
+timezone.default=Europe/Berlin
+
+# Entwickler-Optionen (nur in DEV)
+dev.mockMode.enabled=false
+dev.db.init.script=classpath:/db/init_dev.sql
+dev.trace.id.enabled=true
+
+# Verschachtelte Properties für interne Dienste
+internal.services.payment.endpoint=https://payments.internal/api
+internal.services.payment.timeout.ms=5000
+internal.services.payment.retry.count=3
+
+# Zufällige benutzerdefinierte Einstellungen
+custom.property.alpha.beta.gamma=42
+custom.property.alpha.beta.delta=true
+custom.property.alpha.omega=END

@@ -1,0 +1,43 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base/helloworld
+
+namespace: dev
+
+images:
+  - name: helloworld
+    newName: k3d-registry.127.0.0.1.nip.io:5000/helloworld
+    newTag: v0.1.0
+
+patches:
+  - patch: |-
+      - op: replace 
+        path: /spec/rules/0/host
+        value: dev.demo.local.hr.jambit.space
+      - op: copy
+        from: /spec/rules/0/host
+        path: /spec/tls/0/hosts/0
+      - op: remove
+        path: /spec/tls/0/hosts/1
+    target:
+      kind: Ingress
+      name: helloworld
+
+configMapGenerator:
+  - name: helloproperty
+    behavior: merge
+    files:
+      - properties
+  - name: helloworld-config
+    behavior: replace
+    literals:
+      - PGHOST=dev.postgres.jambit.space
+      - NAME=dev
+
+secretGenerator:
+  - name: helloworld-secret
+    behavior: replace
+    literals:
+      - PGPASSWORD=dsfjie459m

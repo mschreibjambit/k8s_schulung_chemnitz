@@ -1,0 +1,6 @@
+# Konfiguration für den Microservice 'CustomerDataService'
+customer1.service.url=https://api.example.com/customer
+customer1.service.retry.count=5
+customer1.service.retry.delay.ms=2000
+customer1.service.cache.enabled=true
+customer1.service.cache.ttl.seconds=3600
