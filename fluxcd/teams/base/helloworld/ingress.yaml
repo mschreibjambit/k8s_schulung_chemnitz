@@ -4,6 +4,7 @@ kind: Ingress
 metadata:
   name: helloworld
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - helloworld.test.de
